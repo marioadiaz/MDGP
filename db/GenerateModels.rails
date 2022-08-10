@@ -1,0 +1,106 @@
+rails new GPROYECTOS -d postgresql
+
+cd GPROYECTOS
+
+git status
+git add .
+git commit -m "inicio gproyectos"
+git remote add origin https://github.com/marioadiaz/GPROYECTOS.git
+git push -u origin master
+
+yarn add bootstrap@5.2.0
+bundle install
+bundle update
+
+
+rails new BAgency
+cd BAgency/
+yarn add bootstrap popper.js jquery @fortawesome/fontawesome-free 
+bundle update
+yarn add jquery.easing 
+yarn add @popperjs/core
+rails s -b 0.0.0.0 -p 3000
+
+yarn add bootstrap jquery popper.js
+
+configuracion environment.js
+
+const { environment } = require('@rails/webpacker')
+
+const webpack = require('webpack')
+
+environment.plugins.append('Provide', new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery',
+  Popper: ['popper.js', 'default']
+}))
+
+module.exports = environment
+
+fin configuracion environment.js
+
+configuracion application.js
+
+import "bootstrap"
+import "../stylesheets/application"
+
+/*****ESTO ES DE TEST***/
+document.addEventListener("turbolinks:load", function() {
+
+	$('[data-toggle="tooltip"]').tooltip()
+	$('[data-toggle="popover"]').popover()
+
+});
+
+
+fin configuracion application.js
+
+configuracion archivo javascript/stylesheets/application.scss
+
+@import "~bootstrap/scss/bootstrap";
+
+fin configuracion
+
+
+Generate Model
+    rails new SISA01 -d postgresql
+    rails db:create
+    
+ALTA DE CLIENTES
+    rails generate model Cliente cuit:string rubro:string apellido:string nombre:string domicilio:string barrio:string celular:string telefono:string correo:string observaciones_cliente:string tipo_cliente:integer calificacion:string baja:boolean
+
+ALTA DE ROLES
+    rails generate model Rol nombre:string descripcion:string baja:boolean
+
+ALTA DE PROYECTOS
+    rails generate model Proyecto nombre:string  propietario:string categoria:string prioridad:integer progreso:decimal finalizado:boolean fecha_inicio:date fecha_finalizacion:date baja:boolean
+
+ALTA DE TAREAS
+    rails generate model Tarea proyecto:references cliente:references nombre_proyecto:string prioridad:integer progreso:decimal finalizado:boolean costo:decimal   costo_dias:integer asignado_a:integer descripcion_tarea:string fecha_inicio:date fecha_vencimiento:date baja:boolean
+
+ALTA DE SEGUIMIENTOS
+    rails generate model Seguimiento tarea:references descripcion_seguimiento:string finalizado:boolean fecha_inicio:date fecha_vencimiento:date baja:boolean
+
+
+CREACION Y MIGRACION DEL MODELO DE DATOS A LA BD
+
+  rails db:create
+  rails db:migrate
+
+AGREGAR CONTROLADORES
+
+  rails generate controller Clientes new index show create edit update destroy
+  
+  rails generate controller Proyectos new index show create edit update destroy
+
+  rails generate controller Roles new index show create edit update destroy
+
+  rails generate controller Tareas new index show create edit update destroy
+
+  rails generate controller Seguimientos new index show create edit update destroy
+
+  rails generate controller Pages new index show create edit update destroy
+
+a5LWwskfxSqzBcA
+sistemas en git
+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
